@@ -28,7 +28,7 @@ html, body, #root{
 body{
     font: 14px;
     font-family: sans-serif;
-    background-color: var(--neutral-color);
+    background-color: var(--neutral-color1);
 }
 
 a{

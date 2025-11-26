@@ -1,0 +1,44 @@
+:root{
+    --neutral-color1: #EFEFEF;
+    --neutral-color2: #EAEAEC;
+    --neutral-color3: #FFF;
+    --neutral-color4: #F8F8F8;
+    --gray-color1: #CCC;
+    --gray-color2: #DDD;
+    --success-color1: #83BF02;
+    --success-color2: #5FD204;
+    --danger-color1: #F65835;
+    --dark-color1: #121212;
+    --dark-color2: #181C2E;
+    --dark-color3: #000;
+    --dark-color4: rgba(0,0,0, 0.6);
+    --dark-color5: rgba(0,0,0, 0.8);
+}
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html, body, #root{
+    height: 100%;
+}
+
+body{
+    font: 14px;
+    font-family: sans-serif;
+    background-color: var(--neutral-color1);
+}
+
+a{
+    text-decoration: none;
+}
+
+ul{
+    list-style: none;
+}
+
+button{
+    cursor: pointer;
+}

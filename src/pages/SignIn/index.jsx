@@ -1,7 +1,44 @@
+import { useState } from "react";
+import "./signin.css";
+
+import logo from "../../assets/images/logo.png";
+import { Link } from "react-router-dom";
+
 export default function SignIn() {
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
     return (
-        <div>
-            <h1>login page</h1>
+        <div className="container-center">
+            <div className="login">
+                <div className="login-area">
+                    <img src={logo} alt="Call system logo" />
+                </div>
+
+                <form>
+                    <h1>Enter</h1>
+                    <input
+                        type="text"
+                        placeholder="email@email.com"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                    />
+
+                    <input
+                        type="password"
+                        placeholder="**********"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                    />
+
+                    <button type="submit">Access</button>
+                </form>
+
+                <Link to="/register">
+                    Create an account
+                </Link>
+
+            </div>
         </div>
     );
 }

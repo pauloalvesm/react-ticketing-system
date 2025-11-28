@@ -1,4 +1,4 @@
-<h1 align="center">Ticketing System</h1>
+<h1 align="center">💻 Ticketing System</h1>
 
 <p align="center">
   <a href="https://www.w3schools.com/html/"><img alt="HTML5" src="https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white" /></a>
@@ -17,10 +17,16 @@ Repository with a web application to simulate a ticket system.
 This project was developed using the following technologies:
 
 - **Frontend:**  
-  - `HTML5`
+  - `HTML`
   - `CSS`
   - `JavaScript`
   - `React`
+  - `React Router Dom`
+  - `React Toastify`
+  - `React Icons` 
+  - `Date-fns` 
+  - `Vite`
+  - `Firebase`
  
 ## 💾 Clone the repository
 

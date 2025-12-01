@@ -8,6 +8,16 @@ export default function SignIn() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
+    const { signIn } = useContext(AuthContext);
+
+    function handleSignIn(e) {
+        e.preventDefault();
+
+        if (email !== "" && password !== "") {
+            signIn(email, password);
+        }
+    }
+
     return (
         <div className="container-center">
             <div className="login">
@@ -15,7 +25,7 @@ export default function SignIn() {
                     <img src={logo} alt="Call system logo" />
                 </div>
 
-                <form>
+                <form onSubmit={handleSignIn}>
                     <h1>Enter</h1>
                     <input
                         type="text"

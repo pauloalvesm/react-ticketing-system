@@ -1,4 +1,21 @@
+import { useState } from "react";
+
+import logo from "../../assets/images/logo.png";
+import { Link } from "react-router-dom";
+
 export default function SignUp() {
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
+    function handleSubmit(e) {
+        e.preventDefault();
+
+        if (name !== "" && email !== "" && password !== "") {
+            alert("REGISTER!")
+        }
+    }
+
     return (
         <div className="container-center">
             <div className="login">
@@ -6,7 +23,7 @@ export default function SignUp() {
                     <img src={logo} alt="Ticket system logo" />
                 </div>
 
-                <form>
+                <form onSubmit={handleSubmit}>
                     <h1>New account</h1>
                     <input
                         type="text"

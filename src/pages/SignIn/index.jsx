@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useState , useContext} from "react";
 import "./signin.css";
 
 import logo from "../../assets/images/logo.png";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../contexts/auth";
 
 export default function SignIn() {
     const [email, setEmail] = useState("");

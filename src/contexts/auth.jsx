@@ -3,6 +3,7 @@ import { auth, db } from "../services/firebaseConnection";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export const AuthContext = createContext({});
 
@@ -38,6 +39,7 @@ export default function AuthProvider({ children }) {
                         setUser(data);
                         storageUser(data);
                         setLoadingAuth(false);
+                        toast.success("Welcome to the system!");
                         navigate("/dashboard");
                     })
             })

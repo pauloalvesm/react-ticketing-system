@@ -1,4 +1,4 @@
-import { useState , useContext} from "react";
+import { useState, useContext } from "react";
 import "./signin.css";
 
 import logo from "../../assets/images/logo.png";
@@ -9,7 +9,7 @@ export default function SignIn() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    const { signIn } = useContext(AuthContext);
+     const { signIn, loadingAuth } = useContext(AuthContext);
 
     function handleSignIn(e) {
         e.preventDefault();

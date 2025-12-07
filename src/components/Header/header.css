@@ -81,6 +81,30 @@
     }
   }
 
+  @media screen and (max-width: 700px){
+    .sidebar{
+      width: 100%;
+      height: auto;
+      position: relative;
+    }
+  
+    div.content{
+      margin-left: 0;
+    }
+  
+    .sidebar a{
+      float: left;
+    }
+  
+    .sidebar div{
+      display: none;
+    }
+  
+    .sidebar a svg{
+      display: none;
+    }
+  }
+
   @media screen and (max-width: 400px){
     .sidebar a{
       text-align: center;

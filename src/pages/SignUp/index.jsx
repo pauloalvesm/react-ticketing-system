@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import logo from "../../assets/images/logo.png";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../contexts/auth";
@@ -48,7 +48,7 @@ export default function SignUp() {
                     />
 
                     <button type="submit">
-                        {loadingAuth ? "Carregando..." : "Cadastrar"}
+                        {loadingAuth ? "Loading..." : "Register"}
                     </button>
                 </form>
 

@@ -8,9 +8,26 @@ import { AuthContext } from "../../contexts/auth";
 import './profile.css';
 
 export default function Profile() {
-
     const { user } = useContext(AuthContext);
-    const [avatarUrl, setAvatarUrl] = useState(user && user.avatarUrl)
+    const [avatarUrl, setAvatarUrl] = useState(user && user.avatarUrl);
+    const [imageAvatar, setImageAvatar] = useState(null);
+    const [nome, setNome] = useState(user && user.nome);
+    const [email, setEmail] = useState(user && user.email);
+
+    function handleFile(e) {
+        if (e.target.files[0]) {
+            const image = e.target.files[0];
+
+            if (image.type === "image/jpeg" || image.type === "image/png") {
+                setImageAvatar(image)
+                setAvatarUrl(URL.createObjectURL(image))
+            } else {
+                alert("Please send an image in PNG or JPEG format.")
+                setImageAvatar(null);
+                return;
+            }
+        }
+    }
 
     return (
         <div>
@@ -39,10 +56,10 @@ export default function Profile() {
                         </label>
 
                         <label>Name</label>
-                        <input type="text" placeholder="Your name" />
+                        <input type="text" value={name} onChange={(e) => setNome(e.target.value)} />
 
                         <label>Email</label>
-                        <input type="text" placeholder="teste@teste.com" disabled={true} />
+                        <input type="text" value={email} disabled={true} />
 
                         <button type="submit">Save</button>
                     </form>
@@ -50,7 +67,7 @@ export default function Profile() {
                 </div>
 
                 <div className="container">
-                    <button className="logout-btn">Leave</button>
+                    <button className="logout-btn" onClick={() => logout()}>Sair</button>
                 </div>
 
             </div>

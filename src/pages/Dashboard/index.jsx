@@ -64,7 +64,7 @@ export default function Dashboard() {
                                 <td data-label="Subject">Support</td>
                                 <td data-label="Status">
                                     <span className="badge" style={{ backgroundColor: '#999' }}>
-                                        Em aberto
+                                        Open
                                     </span>
                                 </td>
                                 <td data-label="Registered">01/28/2025</td>

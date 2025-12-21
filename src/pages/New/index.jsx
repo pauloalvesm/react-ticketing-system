@@ -73,10 +73,10 @@ export default function New() {
     async function handleRegister(e) {
         e.preventDefault();
 
-        await addDoc(collection(db, "chamados"), {
+        await addDoc(collection(db, "ticketing"), {
             created: new Date(),
-            cliente: customers[customerSelected].companyAddress,
-            clienteId: customers[customerSelected].id,
+            customer: customers[customerSelected].companyAddress,
+            customerId: customers[customerSelected].id,
             subject: subject,
             supplement: supplement,
             status: status,

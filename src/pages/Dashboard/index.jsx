@@ -11,6 +11,8 @@ export default function Dashboard() {
     const [ticket, setTicket] = useState([]);
     const [loading, setLoading] = useState(true);
     const [isEmpty, setIsEmpty] = useState(false);
+    const [lastDocs, setLastDocs] = useState()
+    const [loadingMore, setLoadingMore] = useState(false);
 
     useEffect(() => {
         async function loadTickets() {
@@ -45,38 +47,26 @@ export default function Dashboard() {
                     supplement: doc.data().supplement,
                 })
             })
+            
+            const lastDoc = querySnapshot.docs[querySnapshot.docs.length - 1];
 
             setTicket(ticket => [...ticket, ...ticketList]);
+            setLastDocs(lastDoc);
 
         } else {
             setIsEmpty(true);
         }
+
+        setLoadingMore(false);
     }
 
-    async function updateState(querySnapshot) {
-        const isCollectionEmpty = querySnapshot.size === 0;
+    async function handleMore() {
+        setLoadingMore(true);
 
-        if (!isCollectionEmpty) {
-            let ticketList = [];
+        const q = query(listRef, orderBy("created", "desc"), startAfter(lastDocs), limit(5));
+        const querySnapshot = await getDocs(q);
+        await updateState(querySnapshot);
 
-            querySnapshot.forEach((doc) => {
-                ticketList.push({
-                    id: doc.id,
-                    subject: doc.data().subject,
-                    customer: doc.data().customers,
-                    customerId: doc.data().customerId,
-                    created: doc.data().created,
-                    createdFormat: format(doc.data().created.toDate(), "MM/dd/yyyy"),
-                    status: doc.data().status,
-                    supplement: doc.data().supplement,
-                })
-            })
-
-            setChamados(ticket => [...ticket, ...ticketList]);
-
-        } else {
-            setIsEmpty(true);
-        }
     }
 
     if (loading) {
@@ -140,7 +130,7 @@ export default function Dashboard() {
                                                 <td data-label="Customer">{item.customer}</td>
                                                 <td data-label="Subject">{item.subject}</td>
                                                 <td data-label="Status">
-                                                    <span className="badge" style={{ backgroundColor: item.status === "Aberto" ? "#5CB85C" : "#999" }}>
+                                                    <span className="badge" style={{ backgroundColor: item.status === "Open" ? "#5CB85C" : "#999" }}>
                                                         {item.status}
                                                     </span>
                                                 </td>

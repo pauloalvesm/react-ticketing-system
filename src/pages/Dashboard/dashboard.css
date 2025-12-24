@@ -110,6 +110,23 @@ td[data-label="#"] {
     border-radius: 4px;
 }
 
+.dashboard span{
+    margin: 2em 0;
+    font-size: 1.2em;
+    font-weight: 600;
+}
+
+.btn-more{
+    margin: 1.5em 0;
+    padding: 0.5em 1em;
+    background-color: var(--dark-color2);
+    border:0;
+    border-radius: 5px;
+    font-size: 1.1em;
+    color: var(--neutral-color3);
+}
+
+
 @media screen and (max-width: 600px) {
     td[data-label="#"] {
         display: flex;

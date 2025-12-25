@@ -145,7 +145,7 @@ export default function Dashboard() {
                                                     <FiSearch color="#FFF" size={17} />
                                                 </button>
                                                 <Link to={`/new/${item.id}`} className="action" style={{ backgroundColor: "#F6A935" }}>
-                                                    <FiEdit2 color="#FFF" size={17} />
+                                                    <FiEdit2 color="#FFF" size={17}/>
                                                 </Link>
                                             </td>
                                         </tr>

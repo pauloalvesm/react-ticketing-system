@@ -5,7 +5,8 @@ import Title from "../../components/Title";
 import { FiPlusCircle } from "react-icons/fi";
 import { AuthContext } from "../../contexts/auth";
 import { db } from "../../services/firebaseConnection";
-import { collection, getDocs, getDoc, doc, addDoc } from "firebase/firestore";
+import {collection, getDocs, getDoc, doc, addDoc, updateDoc} from "firebase/firestore";
+import { useParams, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "./new.css";
 
@@ -13,11 +14,11 @@ const listRef = collection(db, "customers");
 
 export default function New() {
     const { user } = useContext(AuthContext);
-
+    const { id } = useParams();
+    const navigate = useNavigate();
     const [customers, setCustomers] = useState([]);
     const [loadCustomer, setLoadCustomer] = useState(true);
     const [customerSelected, setCustomerSelected] = useState(0)
-
     const [supplement, setSupplement] = useState("");
     const [subject, setSubject] = useState("Support");
     const [status, setStatus] = useState("Open");
@@ -45,6 +46,10 @@ export default function New() {
                     setCustomers(customerList);
                     setLoadCustomer(false);
 
+                    if (id) {
+                        loadId(customerList);
+                    }
+
                 })
                 .catch((error) => {
                     console.log("ERROR WHEN SEARCHING FOR CUSTOMERS", error);
@@ -55,6 +60,26 @@ export default function New() {
 
         loadCustomers();
     }, []);
+
+    async function loadId(customersList) {
+        const docRef = doc(db, "ticketing", id);
+
+        await getDoc(docRef)
+            .then((snapshot) => {
+                setSubject(snapshot.data().subject);
+                setStatus(snapshot.data().status);
+                setSupplement(snapshot.data().supplement);
+
+                let index = customersList.findIndex(item => item.id === snapshot.data().customerId);
+                setCustomerSelected(index);
+
+                setIdCustomer(true);
+            })
+            .catch((error) => {
+                console.log("Error loading ticket details: ", error);
+                setIdCustomer(false);
+            });
+    }
 
 
     function handleOptionChange(e) {
@@ -73,6 +98,31 @@ export default function New() {
     async function handleRegister(e) {
         e.preventDefault();
 
+        if (idCustomer) {
+            const docRef = doc(db, "ticketing", id);
+
+            await updateDoc(docRef, {
+                customer: customers[customerSelected].companyAddress,
+                customerId: customers[customerSelected].id,
+                subject: subject,
+                supplement: supplement,
+                status: status,
+                userId: user.uid,
+            })
+            .then(() => {
+                toast.info("Ticket updated successfully!");
+                setCustomerSelected(0);
+                setSupplement("");
+                navigate("/dashboard");
+            })
+            .catch((error) => {
+                toast.error("Ops! Error updating this ticket.");
+                console.log(error);
+            });
+
+            return;
+        }
+
         await addDoc(collection(db, "ticketing"), {
             created: new Date(),
             customer: customers[customerSelected].companyAddress,
@@ -82,15 +132,15 @@ export default function New() {
             status: status,
             userId: user.uid,
         })
-            .then(() => {
-                toast.success("Registered call!");
-                setSupplement("");
-                setCustomerSelected(0);
-            })
-            .catch((error) => {
-                toast.error("Error registering, please try again later!");
-                console.log(error);
-            })
+        .then(() => {
+            toast.success("Ticket registered successfully!");
+            setSupplement("");
+            setCustomerSelected(0);
+        })
+        .catch((error) => {
+            toast.error("Error registering ticket, please try again later.");
+            console.log(error);
+        });
     }
 
     return (

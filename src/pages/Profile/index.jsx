@@ -4,14 +4,13 @@ import Title from "../../components/Title";
 import { FiSettings, FiUpload } from "react-icons/fi";
 import avatar from "../../assets/images/avatar.png";
 import { AuthContext } from "../../contexts/auth";
-
-import './profile.css';
+import "./profile.css";
 
 export default function Profile() {
     const { user } = useContext(AuthContext);
     const [avatarUrl, setAvatarUrl] = useState(user && user.avatarUrl);
     const [imageAvatar, setImageAvatar] = useState(null);
-    const [nome, setNome] = useState(user && user.nome);
+    const [name, setName] = useState(user && user.name);
     const [email, setEmail] = useState(user && user.email);
 
     function handleFile(e) {
@@ -46,7 +45,7 @@ export default function Profile() {
                                 <FiUpload color="#FFF" size={25} />
                             </span>
 
-                            <input type="file" accept="image/*" /> <br />
+                            <input type="file" accept="image/*" onChange={handleFile} /> <br />
                             {avatarUrl === null ? (
                                 <img src={avatar} alt="Profile picture" width={250} height={250} />
                             ) : (
@@ -56,7 +55,7 @@ export default function Profile() {
                         </label>
 
                         <label>Name</label>
-                        <input type="text" value={name} onChange={(e) => setNome(e.target.value)} />
+                        <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
 
                         <label>Email</label>
                         <input type="text" value={email} disabled={true} />
@@ -67,7 +66,7 @@ export default function Profile() {
                 </div>
 
                 <div className="container">
-                    <button className="logout-btn" onClick={() => logout()}>Sair</button>
+                    <button className="logout-btn" onClick={() => logout()}>Exit</button>
                 </div>
 
             </div>

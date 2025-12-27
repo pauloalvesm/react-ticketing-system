@@ -17,6 +17,7 @@ export default function New() {
     const { id } = useParams();
     const navigate = useNavigate();
     const [customers, setCustomers] = useState([]);
+    const [idCustomer, setIdCustomer] = useState(false);
     const [loadCustomer, setLoadCustomer] = useState(true);
     const [customerSelected, setCustomerSelected] = useState(0)
     const [supplement, setSupplement] = useState("");

@@ -7,7 +7,7 @@ import { AuthContext } from "../../contexts/auth";
 import "./profile.css";
 
 export default function Profile() {
-    const { user } = useContext(AuthContext);
+    const { user, logout } = useContext(AuthContext);
     const [avatarUrl, setAvatarUrl] = useState(user && user.avatarUrl);
     const [imageAvatar, setImageAvatar] = useState(null);
     const [name, setName] = useState(user && user.name);

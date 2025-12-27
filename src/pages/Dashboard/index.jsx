@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { collection, getDocs, orderBy, limit, startAfter, query } from "firebase/firestore";
 import { db } from "../../services/firebaseConnection";
 import { format } from "date-fns";
+import Modal from "../../components/Modal";
 import "./dashboard.css";
 
 const listRef = collection(db, "ticketing");
@@ -18,6 +19,8 @@ export default function Dashboard() {
     const [isEmpty, setIsEmpty] = useState(false);
     const [lastDocs, setLastDocs] = useState();
     const [loadingMore, setLoadingMore] = useState(false);
+    const [showPostModal, setShowPostModal] = useState(false);
+    const [detail, setDetail] = useState();
 
     useEffect(() => {
         async function loadTickets() {
@@ -41,12 +44,11 @@ export default function Dashboard() {
             let ticketList = [];
 
             querySnapshot.forEach((doc) => {
-                const data = doc.data(); // Facilita a leitura dos dados
+                const data = doc.data();
 
                 ticketList.push({
                     id: doc.id,
                     subject: data.subject,
-                    // Tenta ler 'customer', se não existir tenta 'companyAddress'
                     customer: data.customer || data.companyAddress || "Not found",
                     customerId: data.customerId,
                     created: data.created,
@@ -76,7 +78,8 @@ export default function Dashboard() {
     }
 
     function toggleModal(item) {
-        console.log("Viewing ticket:", item);
+        setShowPostModal(!showPostModal);
+        setDetail(item);
     }
 
     if (loading) {
@@ -141,7 +144,7 @@ export default function Dashboard() {
                                             </td>
                                             <td data-label="Registered">{item.createdFormat}</td>
                                             <td data-label="ACTIONS">
-                                                <button className="action" style={{ backgroundColor: "#3583F6" }} onClick={() => toggleModal(item)}>
+                                                <button className="action" style={{ backgroundColor: "#3583F6" }} onClick={ () => toggleModal(item)}>
                                                     <FiSearch color="#FFF" size={17} />
                                                 </button>
                                                 <Link to={`/new/${item.id}`} className="action" style={{ backgroundColor: "#F6A935" }}>
@@ -159,6 +162,14 @@ export default function Dashboard() {
                     </>
                 )}
             </div>
+
+            {showPostModal && (
+                <Modal
+                    content={detail} 
+                    close={() => setShowPostModal(!showPostModal)}
+                />
+            )}
+
         </div>
     );
 }

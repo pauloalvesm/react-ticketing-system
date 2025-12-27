@@ -10,7 +10,7 @@
 
 ## 💻 Project
 
-Repository with a web application to simulate a ticket system.
+Repository with a web application to simulate an MVP of a simple ticketing system, this project is for academic purposes.
 
 ## 🚀 Technologies and Tools
 
@@ -28,6 +28,23 @@ This project was developed using the following technologies:
   - `Vite`
   - `Firebase`
  
+## 💪 Future improvements
+
+- To add images to Firebase, you currently need to subscribe to a plan, which is why profile images are not being saved. This is an area for improvement in the future.
+- The creation of new features and functionalities is something interesting for the future.
+
+## ℹ️ Information
+
+- Update your credentials via email with Firebase services at: [firebaseConnection.js](https://github.com/pauloalvesm/react-ticketing-system/blob/master/src/services/firebaseConnection.js)
+
+## ✅ Collections created in Firebase
+
+- `Customers`: address, CNPJ and companyAddress.
+
+- `Ticketing`: created, customer, customerId, status, subject, supplement, userId.
+
+- `Users`: avatarUrl and nome
+ 
 ## 💾 Clone the repository
 
 ```bash
@@ -43,6 +60,14 @@ npm install
 # Run the project
 npm run dev
 ```
+
+## 📷 Screenshots
+
+<p align="center"> <img src="https://github.com/pauloalvesm/react-ticketing-system/blob/master/src/assets/images/screenshot1.png?raw=true" /></p>
+<p align="center"> <img src="https://github.com/pauloalvesm/react-ticketing-system/blob/master/src/assets/images/screenshot2.png?raw=true" /></p>
+<p align="center"> <img src="https://github.com/pauloalvesm/react-ticketing-system/blob/master/src/assets/images/screenshot3.png?raw=true" /></p>
+<p align="center"> <img src="https://github.com/pauloalvesm/react-ticketing-system/blob/master/src/assets/images/screenshot4.png?raw=true" /></p>
+<p align="center"> <img src="https://github.com/pauloalvesm/react-ticketing-system/blob/master/src/assets/images/screenshot5.png?raw=true" /></p>
 
 ## 👤 Author
 
